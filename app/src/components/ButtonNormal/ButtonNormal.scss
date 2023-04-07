@@ -1,0 +1,19 @@
+.button-normal {
+    width: 100%;
+    border-radius: 1.5rem;
+    height: 6rem;
+    background-color: #fff;
+    padding: 0px 2rem;
+    border: .2rem solid #1968DF;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1968DF;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+        background-color: azure;
+    }
+}

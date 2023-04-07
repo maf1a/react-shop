@@ -1,0 +1,106 @@
+.modal-cart {
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_close {
+            height: 2rem;
+            width: 2rem;
+            cursor: pointer;
+        }
+    }
+
+    &_main {
+        margin-top: 3rem;
+
+        .cart-modal-table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th {
+                text-align: left;
+                padding-bottom: 1rem;
+            }
+
+            tbody {
+
+                td, tr {
+                    border: 1px solid #707070;
+                }
+            }
+
+            td {
+                padding: .5rem;
+            }
+
+            .col-1 {
+                width: 35%;
+            }
+            .col-2 {
+                width: 20%;
+            }            
+            .col-3 {
+                width: 20%;
+            }
+            .col-4 {
+                width: 20%;
+            }            
+            .col-5 {
+                width: 5%;
+            }
+
+            .col-input {
+                input {
+                    width: 7rem;
+                    padding: .5rem;
+                    border-radius: .5rem;
+                    border: 1px solid #1968DF;
+                    outline: none;
+                }
+            }
+
+            .col-input {
+                input {
+                    width: 7rem;
+                    padding: .5rem;
+                    border-radius: .5rem;
+                    border: 1px solid #1968DF;
+                    outline: none;
+                }
+            }
+
+            .col-close-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                img {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                }
+            }
+        }
+    }
+
+    &_footer {
+        margin-top: 2rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: flex-end;
+        align-items: center;
+        
+        &_total {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        button {
+            width: 15rem;
+        }
+    }
+}
+
+
+

@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 50%;
+}
+
+body {
+    font-size: 2rem;
+    font-family: "Segoe UI";
+    color: #707070;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container, .modal {
+    margin: auto;
+    max-width: 150rem;
+    padding: 0 1rem;
+
+    @import './pages/login/login.scss';
+    @import './pages/shop/Shop.scss';
+    @import './pages/shop/assets/ShopListItem/ShopListItem.scss';
+    @import './pages/shop/assets/Pagination/Pagination.scss';
+    @import './pages/shop/assets/CartModal/CartModal.scss';
+    
+    @import './components/ButtonNormal/ButtonNormal.scss';
+    @import './components/InputField/InputField.scss';
+    @import './components/PictureText/PictureText.scss';
+    @import './components/Header/Header.scss';
+}
+
+.modal {
+    max-width: 100%;
+}
+
+.ReactModal__Overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ReactModal__Content {
+        width: 100rem;
+        max-height: 90vh;
+        inset: unset !important;
+    }
+}

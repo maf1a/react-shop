@@ -1,0 +1,29 @@
+.page-shop {
+    display: flex;
+    width: 100%;
+
+    &_sidebar {
+        width: 30rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    &_main {
+        width: calc(100% - 30rem);
+
+        &_list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        &_pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+    }
+}

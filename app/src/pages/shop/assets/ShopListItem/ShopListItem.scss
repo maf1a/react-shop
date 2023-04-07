@@ -1,0 +1,47 @@
+.shop-list-item {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    padding: 2rem;
+
+    &_main {
+        &_title {
+            font-weight: 700;
+        }
+
+        &_description {
+            margin-top: 1rem;
+        }
+
+        &_availability_no {
+            font-weight: 600;
+            color: #AFAFAF;
+        }
+
+        &_availability_yes {
+            font-style: italic;
+
+            b {
+                font-style: normal;
+            }
+        }
+    }
+
+    &_right {
+        text-align: right;
+
+        &_price {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        &_action {
+            font-size: 2rem;
+        }
+    
+    }
+}

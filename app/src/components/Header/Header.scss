@@ -1,0 +1,17 @@
+.app-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 0;
+
+    &-logo-container {
+        width: 27.5rem;    
+    }
+
+    &-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+    }
+}
