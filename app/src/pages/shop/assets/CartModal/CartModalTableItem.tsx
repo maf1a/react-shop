@@ -14,7 +14,7 @@ export const CartModalTableItem = (props: ShopListItemSelectedProps) => {
             <td>CHF {(props.price * props.amount).toFixed(2)}</td>
             <td className="col-close">
                 <div className="col-close-content">
-                    <img src="logo-close.svg" onClick={() => storeCart.remove(props.id)} alt="" />
+                    <img src="/logo-close.svg" onClick={() => storeCart.remove(props.id)} alt="" />
                 </div>
             </td>
         </tr>

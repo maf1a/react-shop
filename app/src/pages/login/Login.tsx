@@ -22,7 +22,7 @@ export const Login = observer(() => {
     return (
         <div className="login-container">
             <div className="login-component">
-                <img className="logo" src="logo-big.svg" alt="" />
+                <img className="logo" src="/logo-big.svg" alt="" />
                 <InputField 
                     label="Please enter your username to continue" 
                     type="text"

@@ -55,7 +55,7 @@ function App() {
           <div className="app-container">
             <Routes>
               <Route path="/" element={<Unlogged />} />
-              <Route path="/shop" element={<Logged><Shop/></Logged>} />
+              <Route path="/shop/:pageType?/:pageNumber?" element={<Logged><Shop/></Logged>} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>

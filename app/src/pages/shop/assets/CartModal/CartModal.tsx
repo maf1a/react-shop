@@ -25,10 +25,10 @@ export const CartModal = observer((props: CartModalProps) => {
                 <div className="modal-cart_header">
                     <PictureText 
                         text={`Cart of ${storeUser.user?.name || ""}`}
-                        image="logo-cart.svg"
+                        image="/logo-cart.svg"
                         cursor="default"
                     />
-                    <img className="modal-cart_header_close" onClick={props.close} src="logo-close.svg" alt="" />
+                    <img className="modal-cart_header_close" onClick={props.close} src="/logo-close.svg" alt="" />
                 </div>
                 <div className="modal-cart_main">
                 <table className="cart-modal-table">
@@ -47,7 +47,7 @@ export const CartModal = observer((props: CartModalProps) => {
                 </table>
                 </div>
                 <div className="modal-cart_footer">
-                    <span className="modal-cart_footer_total">Total: CHF {storeCart.total}</span>
+                    <span className="modal-cart_footer_total">Total: CHF {storeCart.total.toFixed(2)}</span>
                     <ButtonNormal label="Order" onClick={() => console.log("clicked order")} />
                 </div>
             </div>

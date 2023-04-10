@@ -3,37 +3,42 @@ import { PictureText } from "../../components/PictureText/PictureText"
 import { PaginatedItems } from "./assets/Pagination/Pagination"
 import { ShopListItem, ShopListItemPropsType } from "./assets/ShopListItem/ShopListItem"
 import { stores } from "../../stores"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import { useEffect } from "react"
 
 export const Shop = observer(() => {
-    let { pageType } = useParams();
     const storeItems = useObserver(() => stores.itemsStore)
-    
-    if (typeof pageType === "string") {
-        storeItems.setType(pageType as unknown as ShopListItemPropsType)
-    }
+    let { pageType, pageNumber } = useParams();
 
+    storeItems.setType(pageType as unknown as ShopListItemPropsType)
+    useEffect(() => {
+        storeItems.fetchPage((parseInt(pageNumber as string) - 1) * 5)
+    }, [pageType])
+    
     return (
         <div className="page-shop">
             <div className="page-shop_sidebar">
-                <PictureText
-                    text="Vegetables"
-                    image=""
-                    clickCallback={() => storeItems.setType(ShopListItemPropsType.vegetable)} 
-                    fatAndDisabled={storeItems.type === ShopListItemPropsType.vegetable}
-                />
-                <PictureText
-                    text="Fruits"
-                    image=""
-                    clickCallback={() => storeItems.setType(ShopListItemPropsType.fruit)} 
-                    fatAndDisabled={storeItems.type === ShopListItemPropsType.fruit}
-                />
-                <PictureText
-                    text="Cheese"
-                    image=""
-                    clickCallback={() => storeItems.setType(ShopListItemPropsType.cheese)} 
-                    fatAndDisabled={storeItems.type === ShopListItemPropsType.cheese}
-                />
+                <Link to="/shop/vegetable">
+                    <PictureText
+                        text="Vegetables"
+                        image=""
+                        fatAndDisabled={storeItems.type === ShopListItemPropsType.vegetable}
+                    />
+                </Link>
+                <Link to="/shop/fruit">
+                    <PictureText
+                        text="Fruits"
+                        image=""
+                        fatAndDisabled={storeItems.type === ShopListItemPropsType.fruit}
+                    />
+                </Link>
+                <Link to="/shop/cheese">
+                    <PictureText
+                        text="Cheese"
+                        image=""
+                        fatAndDisabled={storeItems.type === ShopListItemPropsType.cheese}
+                    />
+                </Link>
             </div>
             <div className="page-shop_main">
                 <div className="page-shop_main_pagination">

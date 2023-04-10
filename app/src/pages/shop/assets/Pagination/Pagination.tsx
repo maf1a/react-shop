@@ -1,24 +1,24 @@
 import { observer, useObserver } from 'mobx-react';
 import ReactPaginate from 'react-paginate';
 import { stores } from '../../../../stores';
-import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
 export const PaginatedItems = observer(({ itemsPerPage }: { itemsPerPage: number }) => {
   const storeItems = useObserver(() => stores.itemsStore)
   const total = storeItems.shownTotalAmount;
   const pageCount = Math.ceil(total / itemsPerPage);
-  const [page, setPage] = useState({} as { forcePage: number } | {})
+  const navigate = useNavigate();
+  let { pageType, pageNumber } = useParams();
 
-  useEffect(() => total === 0 ? setPage({}) : setPage({ forcePage: 0 }), [storeItems.type])
-
+  let pageNumberInt = parseInt(pageNumber as string) - 1 || 0
   const handlePageClick = (event: any) => {
-    setPage({ forcePage: event.selected })
     storeItems.fetchPage((event.selected * itemsPerPage) % total)
+    navigate(`/shop/${pageType}/${event.selected + 1}`)
   };
 
   return <div>
     <ReactPaginate
-          {...page}
+          forcePage={pageNumberInt}
           nextLabel="next >"
           onPageChange={handlePageClick}
           renderOnZeroPageCount={null}

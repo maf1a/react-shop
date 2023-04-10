@@ -2,7 +2,11 @@ import { observer, useObserver } from "mobx-react"
 import { PictureText } from "../../../../components/PictureText/PictureText"
 import { cartStore } from "../../../../stores/CartStore"
 
-export enum ShopListItemPropsType { "fruit", "vegetable", "cheese" }
+export enum ShopListItemPropsType { 
+    fruit = "fruit", 
+    vegetable = "vegetable",
+    cheese = "cheese"
+}
 
 export type ShopListItemProps = {
     id: number
@@ -32,7 +36,7 @@ const Action = observer((props: ShopListItemProps) => {
         <div className="shop-list-item_right_action">
             <PictureText 
                 text="Add to Cart"
-                image="logo-add-to-cart-blue.svg"
+                image="/logo-add-to-cart-blue.svg"
                 cursor="pointer"
                 color="#1968DF"
                 clickCallback={() => storeCart.add(props)}

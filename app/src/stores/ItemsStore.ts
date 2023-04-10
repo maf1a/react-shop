@@ -474,7 +474,8 @@ const fake: ShopListItemProps[] = [
 
 export class ItemsStore {
     items: ShopListItemProps[] = fake;
-    type: ShopListItemProps["type"] = ShopListItemPropsType.vegetable
+    type: ShopListItemProps["type"] | null = null
+    initialType: ShopListItemProps["type"] | null = null
     
     // observables
     shownTotalAmount: number = 0
@@ -483,25 +484,23 @@ export class ItemsStore {
 
     constructor() {
         makeAutoObservable(this);
-        reaction(() => this.type, this.onTypeChange.bind(this));
-        this.onTypeChange()
     }
 
-    onTypeChange() {
-        this.shownTotalAmount = this.items.filter(i => i.type === this.type).length
-        this.fetchPage(0)
-    }
-
-    setType = action((type: ShopListItemProps["type"] = ShopListItemPropsType.vegetable) => {
+    setType = action((type: ShopListItemPropsType = ShopListItemPropsType.vegetable) => {
+        if (this.type === type) return
         if (!Object.values(ShopListItemPropsType).includes(type as ShopListItemPropsType)) {
-            return
+            type = ShopListItemPropsType.vegetable
         }
 
-        if (this.type === type) return
         this.type = type
+        this.shownTotalAmount = this.items.filter(i => i.type === this.type).length
     })
 
     fetchPage = action((offset: number) => {
+        if (this.type === null) {
+            this.type = this.initialType
+        }
+
         this.offset = offset
         this.shownItems = this.items.filter(i => i.type === this.type).splice(this.offset, 5)
     })

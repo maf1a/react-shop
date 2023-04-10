@@ -19,6 +19,7 @@ export const PictureText = (props: PictureTextProps) => {
     let callback = props.clickCallback
     if (props.fatAndDisabled) {
         styles.fontWeight = 600
+        styles.cursor = "default"
         callback = () => {}
     }
 

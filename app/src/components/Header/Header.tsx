@@ -15,7 +15,7 @@ export const Header = observer(() => {
     return (
         <div className="app-header">
             <div className="app-header-logo-container">
-                <img className="header-logo" src="logo-inline.svg" alt="" />
+                <img className="header-logo" src="/logo-inline.svg" alt="" />
             </div>
             <div className="app-header-actions">
                 <PictureText
@@ -25,12 +25,12 @@ export const Header = observer(() => {
                 />
                 <PictureText
                     text="Log out"
-                    image="logo-logout.svg"
+                    image="/logo-logout.svg"
                     clickCallback={() => storeUser.logOut()} 
                 />
                 <PictureText
                     text={`Cart${cartAmount}`}
-                    image="logo-cart.svg"
+                    image="/logo-cart.svg"
                     clickCallback={() => setCartShown(true)} 
                 />
             </div>
