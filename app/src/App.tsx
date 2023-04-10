@@ -17,6 +17,10 @@ const Logged = observer(({children}: {children: React.ReactElement}): React.Reac
     }
   }, [user])
 
+  if (user === null) {
+    return <></>
+  }
+
   return (
     <div>
       <Header />
@@ -35,6 +39,10 @@ const Unlogged = observer((): React.ReactElement => {
       return navigate('/shop')
     }
   }, [user])
+
+  if (user !== null) {
+    return <></>
+  }
 
   return <Login />
 })
