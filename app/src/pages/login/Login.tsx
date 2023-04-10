@@ -2,19 +2,22 @@ import { useState } from "react"
 import { InputField } from "../../components/InputField/InputField"
 import { ButtonNormal } from "../../components/ButtonNormal/ButtonNormal"
 import { useNavigate } from "react-router-dom";
-
-function hasMoreThanFiveLetters(input: string): boolean {
-    return input.replace(/[^a-zA-Z]/g, '').length > 0
-}
+import { observer, useObserver } from "mobx-react";
+import { userStore } from "../../stores/UserStore";
 
 const handleUsernameOrEmail = (str: string): string => {
     return str.replace(/[^a-zA-Z0-9._@-]/g, '').slice(0, 40);
 }
 
-export const Login = () => {
+export const Login = observer(() => {
     const [input, setInput] = useState("")
+    const storeUser = useObserver(() => userStore)
     const navigate = useNavigate()
-    const redirectToShop = () => hasMoreThanFiveLetters(input) && navigate('/shop')
+    const redirectToShop = () => {
+        if (storeUser.create(input)) {
+            navigate('/shop')
+        }
+    }
 
     return (
         <div className="login-container">
@@ -35,5 +38,5 @@ export const Login = () => {
             </div>
         </div>
     )
-}
+})
 

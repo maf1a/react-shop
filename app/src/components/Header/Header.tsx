@@ -1,9 +1,16 @@
 import { useState } from "react"
 import { PictureText } from "../PictureText/PictureText"
 import { CartModal } from "../../pages/shop/assets/CartModal/CartModal"
+import { observer, useObserver } from "mobx-react"
+import { userStore } from "../../stores/UserStore"
+import { cartStore } from "../../stores/CartStore"
 
-export const Header = () => {
+export const Header = observer(() => {
     const [cartShown, setCartShown] = useState(false)
+    const storeUser = useObserver(() => userStore)
+    const storeCart = useObserver(() => cartStore)
+    
+    const cartAmount = storeCart.items.length ? ` (${storeCart.items.length})` : ""
 
     return (
         <div className="app-header">
@@ -12,12 +19,12 @@ export const Header = () => {
             </div>
             <div className="app-header-actions">
                 <PictureText
-                    text="Peter"
+                    text={storeUser.user?.name || ""}
                     image=""
                     cursor="default"
                 />
                 <PictureText
-                    text="Cart"
+                    text={`Cart${cartAmount}`}
                     image="logo-cart.svg"
                     clickCallback={() => setCartShown(true)} 
                 />
@@ -28,4 +35,4 @@ export const Header = () => {
             />
         </div>
     )
-}
+})

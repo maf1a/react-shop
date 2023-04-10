@@ -1,28 +1,57 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Login } from './pages/login/Login';
 import { Shop } from './pages/shop/Shop';
 import { Header } from './components/Header/Header';
+import { stores } from './stores';
+import { Provider, observer, useObserver } from 'mobx-react';
+import { useEffect } from 'react';
 
-const containerLogged = (child: React.ReactNode) => {
+const Logged = observer(({children}: {children: React.ReactElement}): React.ReactElement => {
+  const storeUser = useObserver(() => stores.userStore)
+  const navigate = useNavigate()
+  const user = storeUser.user
+
+  useEffect(() => {
+    if (user === null) {
+      return navigate('/')
+    }
+  }, [user])
+
   return (
     <div>
       <Header />
-      {child}
+      {children}
     </div>
   )
-}
+})
+
+const Unlogged = observer((): React.ReactElement => {
+  const storeUser = useObserver(() => stores.userStore)
+  const navigate = useNavigate()
+  const user = storeUser.user
+
+  useEffect(() => {
+    if (user !== null) {
+      return navigate('/shop')
+    }
+  }, [user])
+
+  return <Login />
+})
 
 function App() {
   // setup store
   return (
     <Router>
-        <div className="app-container">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/shop" element={containerLogged(<Shop />)} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
+        <Provider store={stores}>
+          <div className="app-container">
+            <Routes>
+              <Route path="/" element={<Unlogged />} />
+              <Route path="/shop" element={<Logged><Shop/></Logged>} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
+        </Provider>
     </Router>
   )
 }

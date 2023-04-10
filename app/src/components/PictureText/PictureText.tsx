@@ -1,9 +1,11 @@
 export type PictureTextProps = {
     text: string,
     image: string,
-    color?: "#707070" | "#1968DF"
-    cursor?: "pointer" | "default"
-    clickCallback?: () => void
+    color?: "#707070" | "#1968DF",
+    cursor?: "pointer" | "default",
+    clickCallback?: () => void,
+    fatAndDisabled?: boolean,
+    fontWeight?: number,
 }
 
 export const PictureText = (props: PictureTextProps) => {
@@ -11,7 +13,12 @@ export const PictureText = (props: PictureTextProps) => {
         fill: props.color,
         color: props.color || "#707070",
         cursor: props.cursor || "pointer",
-        clickCallback: props.clickCallback || (() => {}),
+        fontWeight: 400,
+    }
+
+    if (props.fatAndDisabled) {
+        styles.fontWeight = 600
+        // props.clickCallback = undefined
     }
 
     return (

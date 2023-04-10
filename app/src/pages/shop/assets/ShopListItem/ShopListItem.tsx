@@ -1,7 +1,11 @@
+import { observer, useObserver } from "mobx-react"
 import { PictureText } from "../../../../components/PictureText/PictureText"
+import { cartStore } from "../../../../stores/CartStore"
 
 export type ShopListItemProps = {
+    id: number
     title: string
+    type?: "fruit" | "vegetable" | "cheese"
     availability: number
     description: string
     price: number
@@ -16,23 +20,24 @@ const Availability = ({ amount }: { amount: number }) => {
     return <span className="shop-list-item_main_availability_yes"><b>{amount}</b> available</span>
 }
 
-const Action = ({ amount }: { amount: number }) => {
-    if (amount > 0) {
-        return (
-            <div className="shop-list-item_right_action">
-                <PictureText 
-                    text="Add to Cart"
-                    image="logo-add-to-cart-blue.svg"
-                    cursor="pointer"
-                    color="#1968DF"
-                    clickCallback={() => console.log("added to cart")}
-                />
-            </div>
-        )
-    }
+const Action = observer((props: ShopListItemProps) => {
+    if (props.availability <= 0) return <></>
 
-    return <></>
-}
+    const storeCart = useObserver(() => cartStore)
+    if (storeCart.inCart(props.id)) return <></>
+
+    return (
+        <div className="shop-list-item_right_action">
+            <PictureText 
+                text="Add to Cart"
+                image="logo-add-to-cart-blue.svg"
+                cursor="pointer"
+                color="#1968DF"
+                clickCallback={() => storeCart.add(props)}
+            />
+        </div>
+    )
+})
 
 export const ShopListItem = (props: ShopListItemProps) => {
     return (
@@ -45,8 +50,8 @@ export const ShopListItem = (props: ShopListItemProps) => {
                 <div className="shop-list-item_main_description">{props.description}</div>
             </div>
             <div className="shop-list-item_right">
-                <div className="shop-list-item_right_price">CHF {props.price}.- / {props.priceUnit}</div>
-                <Action amount={props.availability} />
+                <div className="shop-list-item_right_price">CHF {props.price} / {props.priceUnit}</div>
+                <Action {...props} />
             </div>
         </div>
     )

@@ -1,9 +1,11 @@
+import { observer, useObserver } from "mobx-react"
 import { PictureText } from "../../components/PictureText/PictureText"
 import { PaginatedItems } from "./assets/Pagination/Pagination"
 import { ShopListItem } from "./assets/ShopListItem/ShopListItem"
+import { stores } from "../../stores"
 
-export const Shop = () => {
-    const { offset, Pagination } = PaginatedItems({ itemsPerPage: 5 })
+export const Shop = observer(() => {
+    const storeItems = useObserver(() => stores.itemsStore)
 
     return (
         <div className="page-shop">
@@ -11,61 +13,30 @@ export const Shop = () => {
                 <PictureText
                     text="Vegetables"
                     image=""
-                    clickCallback={() => console.log("Vegetables clicked")} 
+                    clickCallback={() => storeItems.setType("vegetable")} 
+                    fatAndDisabled={storeItems.type === "vegetable"}
                 />
                 <PictureText
                     text="Fruits"
                     image=""
-                    clickCallback={() => console.log("Fruits clicked")} 
+                    clickCallback={() => storeItems.setType("fruit")} 
+                    fatAndDisabled={storeItems.type === "fruit"}
                 />
                 <PictureText
                     text="Cheese"
                     image=""
-                    clickCallback={() => console.log("Cheese clicked")} 
+                    clickCallback={() => storeItems.setType("cheese")} 
+                    fatAndDisabled={storeItems.type === "cheese"}
                 />
             </div>
             <div className="page-shop_main">
-                <div className="page-shop_main_list">
-                    <ShopListItem 
-                        title="Ananas Golden Large"
-                        availability={5}
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                        price={5}
-                        priceUnit="kg"
-                    />
-                    <ShopListItem 
-                        title="Ananas Golden Large"
-                        availability={0}
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                        price={5}
-                        priceUnit="kg"
-                    />
-                    <ShopListItem 
-                        title="Ananas Golden Large"
-                        availability={5}
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                        price={5}
-                        priceUnit="kg"
-                    />
-                    <ShopListItem 
-                        title="Ananas Golden Large"
-                        availability={5}
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                        price={5}
-                        priceUnit="kg"
-                    />
-                    <ShopListItem 
-                        title="Ananas Golden Large"
-                        availability={5}
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                        price={5}
-                        priceUnit="kg"
-                    />
-                </div>
                 <div className="page-shop_main_pagination">
-                    {Pagination}
+                    <PaginatedItems itemsPerPage={5} />
+                </div>
+                <div className="page-shop_main_list">
+                    {storeItems.shownItems.map(i => <ShopListItem {...i} key={i.id} />)}
                 </div>
             </div>
         </div>
     )
-}
+})

@@ -17,13 +17,13 @@
             flex-direction: column;
             gap: 1rem;
             width: 100%;
+            margin-top: 2rem;
         }
         
         &_pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 2rem;
         }
     }
 }

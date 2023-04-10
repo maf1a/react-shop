@@ -19,7 +19,7 @@ body {
 .app-container, .modal {
     margin: auto;
     max-width: 150rem;
-    padding: 0 1rem;
+    padding: 0 5rem;
 
     @import './pages/login/login.scss';
     @import './pages/shop/Shop.scss';
@@ -35,6 +35,7 @@ body {
 
 .modal {
     max-width: 100%;
+    padding: 0;
 }
 
 .ReactModal__Overlay {

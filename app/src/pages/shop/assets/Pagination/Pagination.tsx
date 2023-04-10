@@ -1,52 +1,42 @@
-import { useState } from 'react';
+import { observer, useObserver } from 'mobx-react';
 import ReactPaginate from 'react-paginate';
+import { stores } from '../../../../stores';
+import { useEffect, useState } from 'react';
 
-// Example items, to simulate fetching from another resources.
-const items = [...Array(333).keys()];
+export const PaginatedItems = observer(({ itemsPerPage }: { itemsPerPage: number }) => {
+  const storeItems = useObserver(() => stores.itemsStore)
+  const total = storeItems.shownTotalAmount;
+  const pageCount = Math.ceil(total / itemsPerPage);
+  const [page, setPage] = useState({} as { forcePage: number } | {})
 
-export function PaginatedItems({ itemsPerPage }: { itemsPerPage: number }) {
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
+  useEffect(() => total === 0 ? setPage({}) : setPage({ forcePage: 0 }), [storeItems.type])
 
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
-
-  // Invoke when user click to request another page.
   const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+    setPage({ forcePage: event.selected })
+    storeItems.fetchPage((event.selected * itemsPerPage) % total)
   };
 
-  return {
-    offset: itemOffset,
-    Pagination: <ReactPaginate
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="pagination-page-item"
-        pageLinkClassName="pagination-page-link"
-        previousClassName="pagination-page-item"
-        previousLinkClassName="pagination-page-link"
-        nextClassName="pagination-page-item"
-        nextLinkClassName="pagination-page-link"
-        breakLabel="..."
-        breakClassName="pagination-page-item"
-        breakLinkClassName="pagination-page-link"
-        containerClassName="pagination-pagination"
-        activeClassName="pagination-active"
-        renderOnZeroPageCount={null}
-    />
-  }
-}
+  return <div>
+    <ReactPaginate
+          {...page}
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          renderOnZeroPageCount={null}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="pagination-page-item"
+          pageLinkClassName="pagination-page-link"
+          previousClassName="pagination-page-item"
+          previousLinkClassName="pagination-page-link"
+          nextClassName="pagination-page-item"
+          nextLinkClassName="pagination-page-link"
+          breakLabel="..."
+          breakClassName="pagination-page-item"
+          breakLinkClassName="pagination-page-link"
+          containerClassName="pagination-pagination"
+          activeClassName="pagination-active"
+      />
+  </div> 
+})
