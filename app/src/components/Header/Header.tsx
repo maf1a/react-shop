@@ -9,7 +9,7 @@ export const Header = observer(() => {
     const [cartShown, setCartShown] = useState(false)
     const storeUser = useObserver(() => userStore)
     const storeCart = useObserver(() => cartStore)
-    
+
     const cartAmount = storeCart.items.length ? ` (${storeCart.items.length})` : ""
 
     return (
@@ -22,6 +22,11 @@ export const Header = observer(() => {
                     text={storeUser.user?.name || ""}
                     image=""
                     cursor="default"
+                />
+                <PictureText
+                    text="Log out"
+                    image="logo-logout.svg"
+                    clickCallback={() => storeUser.logOut()} 
                 />
                 <PictureText
                     text={`Cart${cartAmount}`}

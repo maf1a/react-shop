@@ -1,6 +1,11 @@
 .picture-text {
     display: flex;
     gap: 1rem;
+    flex-wrap: nowrap;
+    
+    span {
+        white-space: nowrap;
+    }
     
     img {
         height: 2.7rem;

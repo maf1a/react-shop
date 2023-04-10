@@ -6,7 +6,7 @@ import { stores } from './stores';
 import { Provider, observer, useObserver } from 'mobx-react';
 import { useEffect } from 'react';
 
-const Logged = observer(({children}: {children: React.ReactElement}): React.ReactElement => {
+const Logged = observer(({ children }: {children: React.ReactElement}): React.ReactElement => {
   const storeUser = useObserver(() => stores.userStore)
   const navigate = useNavigate()
   const user = storeUser.user

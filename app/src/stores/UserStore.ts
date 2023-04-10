@@ -7,8 +7,15 @@ type User = {
     name: string
 }
 
+const getUserFromLocalStorage = () => {
+    const json = localStorage.getItem("user")
+    if (json === null) return null
+    
+    return JSON.parse(json) as User
+}
+
 export class UserStore {
-    user: User | null = null;
+    user: User | null = getUserFromLocalStorage();
 
     constructor() {
         makeAutoObservable(this);
@@ -28,6 +35,13 @@ export class UserStore {
             id: userCount
         }
 
+        localStorage.setItem("user", JSON.stringify(this.user))
+        return true
+    })
+
+    logOut = action(() => {
+        this.user = null
+        localStorage.removeItem("user")
         return true
     })
 }

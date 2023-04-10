@@ -16,13 +16,14 @@ export const PictureText = (props: PictureTextProps) => {
         fontWeight: 400,
     }
 
+    let callback = props.clickCallback
     if (props.fatAndDisabled) {
         styles.fontWeight = 600
-        // props.clickCallback = undefined
+        callback = () => {}
     }
 
     return (
-        <div className="picture-text" style={styles} onClick={props.clickCallback}>
+        <div className="picture-text" style={styles} onClick={callback}>
             <img src={props.image} style={styles} />
             <span>{props.text}</span>
         </div>

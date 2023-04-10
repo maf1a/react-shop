@@ -2,10 +2,12 @@ import { observer, useObserver } from "mobx-react"
 import { PictureText } from "../../../../components/PictureText/PictureText"
 import { cartStore } from "../../../../stores/CartStore"
 
+export enum ShopListItemPropsType { "fruit", "vegetable", "cheese" }
+
 export type ShopListItemProps = {
     id: number
     title: string
-    type?: "fruit" | "vegetable" | "cheese"
+    type?: ShopListItemPropsType
     availability: number
     description: string
     price: number
