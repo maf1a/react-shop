@@ -11,15 +11,8 @@ const Logged = observer(({ children }: {children: React.ReactElement}): React.Re
   const navigate = useNavigate()
   const user = storeUser.user
 
-  useEffect(() => {
-    if (user === null) {
-      return navigate('/')
-    }
-  }, [user])
-
-  if (user === null) {
-    return <></>
-  }
+  useEffect(() => { if (user === null) navigate('/') }, [user])
+  if (user === null) return <></>
 
   return (
     <div>
@@ -34,16 +27,8 @@ const Unlogged = observer((): React.ReactElement => {
   const navigate = useNavigate()
   const user = storeUser.user
 
-  useEffect(() => {
-    if (user !== null) {
-      return navigate('/shop')
-    }
-  }, [user])
-
-  if (user !== null) {
-    return <></>
-  }
-
+  useEffect(() => { if (user !== null) navigate('/shop') }, [user])
+  if (user !== null) return <></>
   return <Login />
 })
 

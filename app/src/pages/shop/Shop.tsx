@@ -9,9 +9,13 @@ import { useEffect } from "react"
 export const Shop = observer(() => {
     const storeItems = useObserver(() => stores.itemsStore)
     let { pageType, pageNumber } = useParams();
-
-    storeItems.setType(pageType as unknown as ShopListItemPropsType)
+    
     useEffect(() => {
+        storeItems.setType(pageType as unknown as ShopListItemPropsType)
+    }, [])
+
+    useEffect(() => {
+        storeItems.setType(pageType as unknown as ShopListItemPropsType)
         storeItems.fetchPage((parseInt(pageNumber as string) - 1) * 5)
     }, [pageType])
     
