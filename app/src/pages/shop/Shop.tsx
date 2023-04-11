@@ -24,7 +24,7 @@ export const Shop = observer(() => {
     }
 
     return (
-        <div className={`page-shop ${storeItems.isLoading ? "loading" : ""}`}>
+        <div className="page-shop">
             <div className="page-shop_sidebar">
                 <Link to="/shop/vegetable">
                     <PictureText
@@ -52,8 +52,8 @@ export const Shop = observer(() => {
                 <div className="page-shop_main_pagination">
                     <PaginatedItems itemsPerPage={5} />
                 </div>
-                <div className="page-shop_main_list">
-                    {storeItems.shownItems.map(i => <ShopListItem {...i} key={i._id} />)}
+                <div className={`page-shop_main_list ${storeItems.isLoading && "loading"}`}>
+                    {storeItems.shownItems.map(item => <ShopListItem {...item} key={item._id} />)}
                 </div>
             </div>
         </div>

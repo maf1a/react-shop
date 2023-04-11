@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { PictureText } from "../PictureText/PictureText"
+import { PictureText } from "../../components/PictureText/PictureText"
 import { CartModal } from "../../pages/shop/assets/CartModal/CartModal"
 import { observer, useObserver } from "mobx-react"
 import { userStore } from "../../stores/UserStore"

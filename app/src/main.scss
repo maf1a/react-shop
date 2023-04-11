@@ -30,7 +30,7 @@ body {
     @import './components/ButtonNormal/ButtonNormal.scss';
     @import './components/InputField/InputField.scss';
     @import './components/PictureText/PictureText.scss';
-    @import './components/Header/Header.scss';
+    @import './layout/Header/Header.scss';
 }
 
 .modal {
@@ -38,6 +38,7 @@ body {
     padding: 0;
 }
 
+// namings according to the external plugin
 .ReactModal__Overlay {
     display: flex;
     justify-content: center;
