@@ -15,7 +15,7 @@ const Action = observer((props: ShopListItemProps) => {
     if (props.availability <= 0) return <></>
 
     const storeCart = useObserver(() => cartStore)
-    if (storeCart.inCart(props.id)) return <></>
+    if (storeCart.inCart(props._id)) return <></>
 
     return (
         <div className="shop-list-item_right_action">
