@@ -2,18 +2,16 @@ import { ShoppingItemModel } from "../models/ShoppingItem";
 
 export const resolvers = {
     Query: {
-        async getShoppingItemsPage(_, { type, offset, limit }) {
-            return await ShoppingItemModel.find({ type }).limit(limit).skip(offset)
-        },
-
-        async getShoppingItemsPageWithTotal(_, { type, limit, offset }) {
-            const shoppingItems = await ShoppingItemModel.find({ type }).limit(limit).skip(offset)
-            const total = await ShoppingItemModel.count({ type })
-
+        async getShoppingItems(_, { type, limit, offset }) {
             return {
-                total,
-                shoppingItems
+                type,
+                shoppingItems: await ShoppingItemModel.find({ type }).limit(limit).skip(offset)
             }
+        },
+    },
+    ShoppingItemsResult: {
+        async total({ type }) {
+            return await ShoppingItemModel.countDocuments({ type })
         },
     },
 }

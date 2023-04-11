@@ -1,5 +1,6 @@
 import { action, makeAutoObservable } from "mobx";
 import { queryAPI } from "../repository/appolo";
+import { getShoppingItems } from "./ItemsStoreRequests";
 
 export enum ShopListItemPropsType { 
     fruit = "fruit", 
@@ -19,11 +20,11 @@ export type ShopListItemProps = {
 
 export class ItemsStore {
     items: ShopListItemProps[] = [];
-    type: ShopListItemProps["type"] | null = null
-    initialType: ShopListItemProps["type"] | null = null
+    type: ShopListItemPropsType | null = null
+    initialType: ShopListItemPropsType | null = null
     
     // observables
-    shownTotalAmount: number = 0
+    shownTotalAmount = 0
     shownItems: ShopListItemProps[] = []
     offset: number = 0
     hasError = false
@@ -33,43 +34,22 @@ export class ItemsStore {
         makeAutoObservable(this);
     }
 
+    setLoadingState = action((state: boolean) => this.isLoading = state)
+    setErrorState = action((state: boolean) => this.hasError = state)
+
     setType = action(async (type: ShopListItemPropsType = ShopListItemPropsType.vegetable, pageNumber = 0) => {
+        if (this.type === type) return
         if (!Object.values(ShopListItemPropsType).includes(type as ShopListItemPropsType)) {
             type = ShopListItemPropsType.vegetable
         }
 
-        if (this.type === type) return
         this.type = type
-        this.shownTotalAmount = this.items.filter(i => i.type === this.type).length
-
-        const query = `
-            query { 
-                getShoppingItemsPageWithTotal(type: "${this.type}", limit: 5, offset: ${pageNumber * 5}) {
-                    total,
-                    shoppingItems {
-                        _id 
-                        title 
-                        type 
-                        availability 
-                        description 
-                        price 
-                        priceUnit
-                    }
-                }
-            }
-        `;
-
-        this.isLoading = true
-        const { data, error } = await queryAPI(query);
-        this.isLoading = false
-        if (error) {
-            this.hasError = true
-            console.error(error)
-            return
+        const result = await getShoppingItems(this, { limit: 5, offset: pageNumber * 5, type, includeCount: true });
+        if (result) {
+            const { getShoppingItems: { total, shoppingItems } } = result
+            this.shownTotalAmount = total
+            this.shownItems = shoppingItems
         }
-
-        this.shownTotalAmount = data.getShoppingItemsPageWithTotal.total
-        this.shownItems = data.getShoppingItemsPageWithTotal.shoppingItems
     })
 
     fetchPage = action(async (offset: number) => {
@@ -78,31 +58,11 @@ export class ItemsStore {
         }
 
         this.offset = offset
-        const query = `
-            query { 
-                getShoppingItemsPage(type: "${this.type}", limit: 5, offset:${offset || 0}) {
-                    _id 
-                    title 
-                    type 
-                    availability 
-                    description 
-                    price 
-                    priceUnit
-                }
-            }
-        `;
-
-        this.isLoading = true
-        const { data, error } = await queryAPI(query);
-        this.isLoading = false
-
-        if (error) {
-            this.hasError = true
-            console.error(error)
-            return
+        const result = await getShoppingItems(this, { limit: 5, offset, type: this.type, includeCount: false });
+        if (result) {
+            const { getShoppingItems: { shoppingItems } } = result
+            this.shownItems = shoppingItems
         }
-
-        this.shownItems = data.getShoppingItemsPage
     })
 }
 

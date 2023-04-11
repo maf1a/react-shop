@@ -11,13 +11,12 @@ export const typeDefs = gql`
         priceUnit: String!
     }
 
-    type ShoppingItemWithTotal {
+    type ShoppingItemsResult {
         total: Int!,
         shoppingItems: [ShoppingItem]
     }
 
     type Query {
-        getShoppingItemsPage(type: String, offset: Int, limit: Int): [ShoppingItem]!
-        getShoppingItemsPageWithTotal(type: String, limit: Int, offset: Int): ShoppingItemWithTotal!
+        getShoppingItems(type: String, offset: Int, limit: Int): ShoppingItemsResult!
     }
 `;

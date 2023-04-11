@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, DocumentNode, InMemoryCache } from '@apollo/client';
 import gql from "graphql-tag";
 
 export const apollo = new ApolloClient({
@@ -6,11 +6,16 @@ export const apollo = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const queryAPI = async (q: string) => {
+export const queryAPI = async (query: DocumentNode) => {
     try {
-        const query = gql`${q}`;
-        return await apollo.query({ query });
+        const result = await apollo.query({ query });
+        if (result.error) {
+            console.error(result.error)
+        }
+
+        return result
     } catch(e) {
+        console.error(e)
         return { data: null, error: e }
     }
 }

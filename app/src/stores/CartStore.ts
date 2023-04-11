@@ -3,6 +3,7 @@ import { ShopListItemProps } from "./ItemsStore";
 
 export type ShopListItemSelectedProps = {
     id: number
+    type: string
     title: string
     price: number
     priceUnit: string
@@ -42,6 +43,7 @@ export class CartStore {
 
         this.items = [...this.items, {
             id: item._id || 0, 
+            type: item.type,
             title: item.title,
             price: item.price,
             priceUnit: item.priceUnit,
