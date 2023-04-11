@@ -18,6 +18,6 @@ export const typeDefs = gql`
 
     type Query {
         getShoppingItemsPage(type: String, offset: Int, limit: Int): [ShoppingItem]!
-        getShoppingItemsPageWithTotal(type: String, limit: Int): ShoppingItemWithTotal!
+        getShoppingItemsPageWithTotal(type: String, limit: Int, offset: Int): ShoppingItemWithTotal!
     }
 `;

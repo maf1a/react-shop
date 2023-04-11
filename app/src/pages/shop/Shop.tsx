@@ -9,10 +9,10 @@ import { ShopListItemPropsType } from "../../stores/ItemsStore"
 
 export const Shop = observer(() => {
     const storeItems = useObserver(() => stores.itemsStore)
-    let { pageType } = useParams();
+    let { pageType, pageNumber } = useParams();
 
     useEffect(() => {
-        storeItems.setType(pageType as unknown as ShopListItemPropsType)
+        storeItems.setType(pageType as unknown as ShopListItemPropsType, Number(pageNumber) - 1 || 0)
     }, [pageType])
     
     if (storeItems.hasError) {

@@ -33,7 +33,7 @@ export class ItemsStore {
         makeAutoObservable(this);
     }
 
-    setType = action(async (type: ShopListItemPropsType = ShopListItemPropsType.vegetable) => {
+    setType = action(async (type: ShopListItemPropsType = ShopListItemPropsType.vegetable, pageNumber = 0) => {
         if (!Object.values(ShopListItemPropsType).includes(type as ShopListItemPropsType)) {
             type = ShopListItemPropsType.vegetable
         }
@@ -44,7 +44,7 @@ export class ItemsStore {
 
         const query = `
             query { 
-                getShoppingItemsPageWithTotal(type: "${this.type}", limit: 5) {
+                getShoppingItemsPageWithTotal(type: "${this.type}", limit: 5, offset: ${pageNumber * 5}) {
                     total,
                     shoppingItems {
                         _id 

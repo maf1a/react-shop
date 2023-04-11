@@ -6,8 +6,8 @@ export const resolvers = {
             return await ShoppingItemModel.find({ type }).limit(limit).skip(offset)
         },
 
-        async getShoppingItemsPageWithTotal(_, { type, limit }) {
-            const shoppingItems = await ShoppingItemModel.find({ type }).limit(limit)
+        async getShoppingItemsPageWithTotal(_, { type, limit, offset }) {
+            const shoppingItems = await ShoppingItemModel.find({ type }).limit(limit).skip(offset)
             const total = await ShoppingItemModel.count({ type })
 
             return {
