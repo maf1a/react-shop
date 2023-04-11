@@ -2,6 +2,10 @@
     display: flex;
     width: 100%;
 
+    &.loading {
+        opacity: 0.5;
+    }
+
     &_sidebar {
         width: 30rem;
         display: flex;

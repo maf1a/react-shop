@@ -1,22 +1,7 @@
 import { observer, useObserver } from "mobx-react"
 import { PictureText } from "../../../../components/PictureText/PictureText"
 import { cartStore } from "../../../../stores/CartStore"
-
-export enum ShopListItemPropsType { 
-    fruit = "fruit", 
-    vegetable = "vegetable",
-    cheese = "cheese"
-}
-
-export type ShopListItemProps = {
-    id: number
-    title: string
-    type?: ShopListItemPropsType
-    availability: number
-    description: string
-    price: number
-    priceUnit: string
-}
+import { ShopListItemProps } from "../../../../stores/ItemsStore"
 
 const Availability = ({ amount }: { amount: number }) => {
     if (amount <= 0) {

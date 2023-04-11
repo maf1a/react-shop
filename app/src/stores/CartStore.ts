@@ -1,5 +1,5 @@
 import { action, makeAutoObservable, reaction } from "mobx";
-import { ShopListItemProps } from "../pages/shop/assets/ShopListItem/ShopListItem";
+import { ShopListItemProps } from "./ItemsStore";
 
 export type ShopListItemSelectedProps = {
     id: number
@@ -36,12 +36,12 @@ export class CartStore {
     })
 
     add = action((item: ShopListItemProps) => {
-        if (this.inCart(item.id)) {
+        if (this.inCart(item._id)) {
             return
         }
 
         this.items = [...this.items, {
-            id: item.id || 0,
+            id: item._id || 0, 
             title: item.title,
             price: item.price,
             priceUnit: item.priceUnit,
