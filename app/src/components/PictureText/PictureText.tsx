@@ -6,6 +6,7 @@ export type PictureTextProps = {
     clickCallback?: () => void,
     fatAndDisabled?: boolean,
     fontWeight?: number,
+    borderRadius?: "50%",
 }
 
 export const PictureText = (props: PictureTextProps) => {
@@ -14,6 +15,7 @@ export const PictureText = (props: PictureTextProps) => {
         color: props.color || "#707070",
         cursor: props.cursor || "pointer",
         fontWeight: 400,
+        borderRadius: props.borderRadius || "0"
     }
 
     let callback = props.clickCallback

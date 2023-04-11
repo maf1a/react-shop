@@ -20,8 +20,9 @@ export const Header = observer(() => {
             <div className="app-header-actions">
                 <PictureText
                     text={storeUser.user?.name || ""}
-                    image=""
+                    image={`https://i.pravatar.cc/15?u=${storeUser.user?.name}`}
                     cursor="default"
+                    borderRadius="50%"
                 />
                 <PictureText
                     text="Log out"

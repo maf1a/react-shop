@@ -487,11 +487,11 @@ export class ItemsStore {
     }
 
     setType = action((type: ShopListItemPropsType = ShopListItemPropsType.vegetable) => {
-        if (this.type === type) return
         if (!Object.values(ShopListItemPropsType).includes(type as ShopListItemPropsType)) {
             type = ShopListItemPropsType.vegetable
         }
 
+        if (this.type === type) return
         this.type = type
         this.shownTotalAmount = this.items.filter(i => i.type === this.type).length
     })

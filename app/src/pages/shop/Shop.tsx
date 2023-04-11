@@ -25,21 +25,21 @@ export const Shop = observer(() => {
                 <Link to="/shop/vegetable">
                     <PictureText
                         text="Vegetables"
-                        image=""
+                        image="/logo-shopping-item.svg"
                         fatAndDisabled={storeItems.type === ShopListItemPropsType.vegetable}
                     />
                 </Link>
                 <Link to="/shop/fruit">
                     <PictureText
                         text="Fruits"
-                        image=""
+                        image="/logo-shopping-item.svg"
                         fatAndDisabled={storeItems.type === ShopListItemPropsType.fruit}
                     />
                 </Link>
                 <Link to="/shop/cheese">
                     <PictureText
                         text="Cheese"
-                        image=""
+                        image="/logo-shopping-item.svg"
                         fatAndDisabled={storeItems.type === ShopListItemPropsType.cheese}
                     />
                 </Link>
