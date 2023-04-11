@@ -27,7 +27,10 @@ export const Header = observer(() => {
                 <PictureText
                     text="Log out"
                     image="/logo-logout.svg"
-                    clickCallback={() => storeUser.logOut()} 
+                    clickCallback={() => {
+                        storeUser.logOut()
+                        storeCart.emptyCart()
+                    }} 
                 />
                 <PictureText
                     text={`Cart${cartAmount}`}

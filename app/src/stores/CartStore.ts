@@ -26,6 +26,10 @@ export class CartStore {
         return this.items.some(i => i.id === id);
     }
 
+    emptyCart() {
+        this.items = []
+    }
+
     setAmount = action((id: number, amount: number) => {
         this.items = this.items.map(item => {
             if (item.id === id) {

@@ -26,11 +26,7 @@ export class UserStore {
             return
         }
 
-        this.user = {
-            name,
-            id: userCount
-        }
-
+        this.user = { name, id: userCount }
         localStorage.setItem("user", JSON.stringify(this.user))
         return
     })

@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'r
 import { Shop } from './pages/shop/Shop';
 import { stores } from './stores';
 import { Provider } from 'mobx-react';
-import { LoginGuardLogged } from './layout/LoginGuardLogged';
-import { LoginGuardUnlogged } from './layout/LoginGuardUnlogged';
+import { LoginGuardLogged } from './layout/LoginGuard/LoginGuardLogged';
+import { LoginGuardUnlogged } from './layout/LoginGuard/LoginGuardUnlogged';
 
 function App() {
   return (
