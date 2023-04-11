@@ -1,22 +1,10 @@
 import { gql } from 'apollo-server-express';
+import { ShoppingItemsTypes, ShoppingItemsTypesQueries } from './ShoppingItems/ShoppingItemsTypes';
 
 export const typeDefs = gql`
-    type ShoppingItem {
-        _id: ID
-        title: String!
-        type: String!
-        availability: Float!
-        description: String!
-        price: Float!
-        priceUnit: String!
-    }
-
-    type ShoppingItemsResult {
-        total: Int!,
-        shoppingItems: [ShoppingItem]
-    }
-
+    ${ShoppingItemsTypes}
+    
     type Query {
-        getShoppingItems(type: String, offset: Int, limit: Int): ShoppingItemsResult!
+        ${ShoppingItemsTypesQueries}
     }
 `;
