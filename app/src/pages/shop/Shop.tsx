@@ -19,7 +19,7 @@ export const Shop = observer(() => {
         return <>Error during an api connection. Please check that your backend server is running and env variables are set correctly. As soon as it's working, please refresh the page</>
     }
     
-    if (storeItems.isLoading) {
+    if (storeItems.isLoading && storeItems.shownItems.length === 0) {
         return <>Loading...</>
     }
 
