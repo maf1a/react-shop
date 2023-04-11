@@ -8,7 +8,7 @@ export const PaginatedItems = observer(({ itemsPerPage }: { itemsPerPage: number
   const total = storeItems.shownTotalAmount;
   const pageCount = Math.ceil(total / itemsPerPage);
   const navigate = useNavigate();
-  let { pageType, pageNumber } = useParams();
+  let { pageNumber } = useParams();
 
   let pageNumberInt = parseInt(pageNumber as string) - 1 || 0
   const handlePageClick = (event: any) => {

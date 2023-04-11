@@ -21,13 +21,9 @@ export class UserStore {
         makeAutoObservable(this);
     }
 
-    hasMoreThanFiveLetters(input: string): boolean {
-        return input.replace(/[^a-zA-Z]/g, '').length > 0
-    }
-
-    create = action((name: string): boolean => {
-        if (this.hasMoreThanFiveLetters(name) === false) {
-            return false
+    logIn = action((name: string) => {
+        if (name.replace(/[^a-zA-Z]/g, '').length > 0 === false) {
+            return
         }
 
         this.user = {
@@ -36,7 +32,7 @@ export class UserStore {
         }
 
         localStorage.setItem("user", JSON.stringify(this.user))
-        return true
+        return
     })
 
     logOut = action(() => {

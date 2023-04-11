@@ -13,10 +13,10 @@ export const Login = observer(() => {
     const [input, setInput] = useState("")
     const storeUser = useObserver(() => userStore)
     const navigate = useNavigate()
-    const redirectToShop = () => {
-        if (storeUser.create(input)) {
-            navigate('/shop')
-        }
+    
+    if (storeUser.user !== null) {
+        navigate('/shop')
+        return null
     }
 
     return (
@@ -28,12 +28,12 @@ export const Login = observer(() => {
                     type="text"
                     className="login-input-field"
                     onInput={r => setInput(handleUsernameOrEmail(r.value))} 
-                    onKeyPressedCallback={r => r.keyCode === "Enter" && redirectToShop()} 
+                    onKeyPressedCallback={r => r.keyCode === "Enter" && storeUser.logIn(input)} 
                     value={input}
                 />
                 <ButtonNormal 
                     label="Sign In"
-                    onClick={redirectToShop}
+                    onClick={() => storeUser.logIn(input)}
                 />
             </div>
         </div>
