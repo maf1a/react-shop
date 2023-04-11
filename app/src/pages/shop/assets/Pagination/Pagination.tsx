@@ -13,7 +13,7 @@ export const PaginatedItems = observer(({ itemsPerPage }: { itemsPerPage: number
   let pageNumberInt = parseInt(pageNumber as string) - 1 || 0
   const handlePageClick = (event: any) => {
     storeItems.fetchPage((event.selected * itemsPerPage) % total)
-    navigate(`/shop/${pageType}/${event.selected + 1}`)
+    navigate(`/shop/${storeItems.type}/${event.selected + 1}`)
   };
 
   return <div>
