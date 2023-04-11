@@ -1,7 +1,7 @@
 ### To run the application:
 
 - Open the terminal to clone the repo by running `git clone https://github.com/maf1a/react-shop`
-- Create .env file in /api with following variables:
+- Create .env file in `react-shop/api` with following variables:
     GQL_USER=[ask the owner of the repo]
     GQL_PASS=[ask the owner of the repo]
 
