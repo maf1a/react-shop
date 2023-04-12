@@ -423,10 +423,143 @@ export async function seed() {
             description: "Bold and crumbly Stilton, with its blue veins and complex flavor, matured in the historic cellars of England",
             price: 18.59,
             priceUnit: "kg"
+        },
+        {
+            title: "Queso de Cabra",
+            type: ShopListItemPropsType.cheese,
+            availability: 120,
+            description: "Mild and crumbly goat cheese, with its zesty flavor and smooth texture, crafted in the sun-soaked regions of Spain",
+            price: 2.19,
+            priceUnit: "100g"
+        },
+        {
+            title: "Raclette",
+            type: ShopListItemPropsType.cheese,
+            availability: 100,
+            description: "Semi-firm and aromatic Raclette, perfect for melting, handcrafted in the Swiss and French Alpine regions",
+            price: 2.49,
+            priceUnit: "100g"
+        },
+        {
+            title: "Ossau-Iraty",
+            type: ShopListItemPropsType.cheese,
+            availability: 95,
+            description: "Buttery and nutty sheep's milk cheese, with a velvety texture, produced in the Pyrenees region of France",
+            price: 2.79,
+            priceUnit: "100g"
+        },
+        {
+            title: "Emmental",
+            type: ShopListItemPropsType.cheese,
+            availability: 105,
+            description: "Mild and fruity Swiss cheese, with its iconic holes and smooth texture, crafted in the lush valleys of Switzerland",
+            price: 2.29,
+            priceUnit: "100g"
+        },
+        {
+            title: "Cotija",
+            type: ShopListItemPropsType.cheese,
+            availability: 130,
+            description: "Salty and crumbly Mexican cheese, with a bold flavor and firm texture, produced in the Michoacán region of Mexico",
+            price: 1.99,
+            priceUnit: "100g"
+        },
+        {
+            title: "Saint-Nectaire",
+            type: ShopListItemPropsType.cheese,
+            availability: 110,
+            description: "Semi-soft and earthy French cheese, with a grassy aroma and supple texture, crafted in the volcanic Auvergne region",
+            price: 2.69,
+            priceUnit: "100g"
+        },
+        {
+            title: "Reblochon",
+            type: ShopListItemPropsType.cheese,
+            availability: 90,
+            description: "Creamy and nutty French cheese, with a soft, velvety texture, produced in the Haute-Savoie region of the French Alps",
+            price: 2.89,
+            priceUnit: "100g"
+        },
+        {
+            title: "Tilsit",
+            type: ShopListItemPropsType.cheese,
+            availability: 100,
+            description: "Semi-hard and tangy German cheese, with a slightly pungent aroma and firm texture, produced in the Baltic region",
+            price: 2.19,
+            priceUnit: "100g"
+        },
+        {
+            title: "Wensleydale",
+            type: ShopListItemPropsType.cheese,
+            availability: 110,
+            description: "Crumbly and moist British cheese, with a mild, sweet flavor and hints of honey, handcrafted in the Yorkshire Dales",
+            price: 2.09,
+            priceUnit: "100g"
+        },
+        {
+            title: "Roquefort",
+            type: ShopListItemPropsType.cheese,
+            availability: 100,
+            description: "Complex and tangy Roquefort, with its sharp taste and crumbly texture, matured in the historic caves of Southern France",
+            price: 2.99,
+            priceUnit: "100g"
+        },
+        {
+            title: "Mahon",
+            type: ShopListItemPropsType.cheese,
+            availability: 105,
+            description: "Semi-hard and buttery Spanish cheese, with a fruity aroma and slightly tangy taste, produced on the island of Menorca",
+            price: 2.39,
+            priceUnit: "100g"
+        },
+        {
+            title: "Appenzeller",
+            type: ShopListItemPropsType.cheese,
+            availability: 95,
+            description: "Firm and spicy Swiss cheese, with a distinct aroma and nutty flavor, handcrafted in the Appenzell region of Switzerland",
+            price: 2.69,
+            priceUnit: "100g"
+        },
+        {
+            title: "Caerphilly",
+            type: ShopListItemPropsType.cheese,
+            availability: 90,
+            description: "Mild and crumbly Welsh cheese, with a tangy flavor and moist texture, produced in the verdant valleys of Wales",
+            price: 2.19,
+            priceUnit: "100g"
+        },
+        {
+            title: "Valdeón",
+            type: ShopListItemPropsType.cheese,
+            availability: 85,
+            description: "Strong and creamy Spanish blue cheese, with a piquant flavor and soft texture, crafted in the Picos de Europa mountains",
+            price: 2.79,
+            priceUnit: "100g"
+        },
+        {
+            title: "Taleggio",
+            type: ShopListItemPropsType.cheese,
+            availability: 100,
+            description: "Soft and pungent Italian cheese, with fruity undertones and a creamy texture, produced in the Alpine regions of Italy",
+            price: 2.49,
+            priceUnit: "100g"
+        },
+        {
+            title: "Sbrinz",
+            type: ShopListItemPropsType.cheese,
+            availability: 115,
+            description: "Hard and nutty Swiss cheese, with a granular texture and robust flavor, handcrafted in the central Swiss Alps",
+            price: 2.89,
+            priceUnit: "100g"
         }
     ];
 
-    for (const shoppingItem of shoppingItems) {
+    const shuffled = shoppingItems
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+
+    for (const shoppingItem of shuffled) {
         await ShoppingItemModel.create(shoppingItem)
     }
 
