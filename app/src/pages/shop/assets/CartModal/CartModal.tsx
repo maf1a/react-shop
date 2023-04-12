@@ -48,7 +48,10 @@ export const CartModal = observer((props: CartModalProps) => {
                 </div>
                 <div className="modal-cart_footer">
                     <span className="modal-cart_footer_total">Total: CHF {storeCart.total.toFixed(2)}</span>
-                    <ButtonNormal label="Order" onClick={() => cartStore.createOrder() } />
+                    <ButtonNormal label="Order" onClick={async () => {
+                        await cartStore.createOrder()
+                        props.close()
+                    }} />
                 </div>
             </div>
         </ReactModal>

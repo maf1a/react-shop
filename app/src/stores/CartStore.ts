@@ -69,7 +69,10 @@ export class CartStore {
 
     createOrder = action(async () => {
         if (this.items.length === 0) return
-        await createOrderRequest(this, { username: userStore.user?.name || "", items: this.items })
+        const { error } = await createOrderRequest(this, { username: userStore.user?.name || "", items: this.items })
+        if (!error) {
+            this.items = []
+        }
     })
 }
 
