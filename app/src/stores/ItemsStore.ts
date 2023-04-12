@@ -1,5 +1,4 @@
 import { action, makeAutoObservable } from "mobx";
-import { queryAPI } from "../repository/appolo";
 import { getShoppingItems } from "./ItemsStoreRequests";
 
 export enum ShopListItemPropsType { 

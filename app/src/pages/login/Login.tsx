@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { InputField } from "../../components/InputField/InputField"
 import { ButtonNormal } from "../../components/ButtonNormal/ButtonNormal"
-import { useNavigate } from "react-router-dom";
 import { observer, useObserver } from "mobx-react";
 import { userStore } from "../../stores/UserStore";
 
@@ -12,12 +11,6 @@ const handleUsernameOrEmail = (str: string): string => {
 export const Login = observer(() => {
     const [input, setInput] = useState("")
     const storeUser = useObserver(() => userStore)
-    const navigate = useNavigate()
-    
-    if (storeUser.user !== null) {
-        navigate('/shop')
-        return null
-    }
 
     return (
         <div className="login-container">

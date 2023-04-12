@@ -1,4 +1,3 @@
-import { Timestamp } from "mongodb";
 import { Schema, model } from "mongoose";
 
 export interface IShoppingItemOrdered {

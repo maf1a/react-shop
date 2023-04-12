@@ -1,5 +1,4 @@
 import { ApolloClient, DocumentNode, InMemoryCache } from '@apollo/client';
-import gql from "graphql-tag";
 
 export const apollo = new ApolloClient({
     uri: 'http://localhost:5000/graphql',

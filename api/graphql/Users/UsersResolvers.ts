@@ -1,4 +1,4 @@
-import { IOrder, UserModel } from "../../models/User"
+import { UserModel } from "../../models/User"
 
 const getUserByUsername = async (username: string) => {
     const user = await UserModel.findOne({ username })

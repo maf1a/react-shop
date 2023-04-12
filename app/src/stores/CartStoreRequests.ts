@@ -1,5 +1,5 @@
 import gql from "graphql-tag"
-import { mutateAPI, queryAPI } from "../repository/appolo";
+import { mutateAPI } from "../repository/appolo";
 import { CartStore, ShopListItemSelectedProps } from "./CartStore";
 
 type CreateOrderArgs = { 

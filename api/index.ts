@@ -1,7 +1,7 @@
 import 'dotenv/config'
 
 import { ApolloServer } from 'apollo-server-express';
-import express, { Application } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 
 import { typeDefs } from './graphql/typederfs'
