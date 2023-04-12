@@ -1,5 +1,7 @@
 import { action, makeAutoObservable, reaction } from "mobx";
 import { ShopListItemProps } from "./ItemsStore";
+import { createOrderRequest } from "./CartStoreRequests";
+import { userStore } from "./UserStore";
 
 export type ShopListItemSelectedProps = {
     id: number
@@ -14,6 +16,8 @@ export type ShopListItemSelectedProps = {
 export class CartStore {
     items: ShopListItemSelectedProps[] = [];
     total: number = 0
+    isLoading = false
+    hasError = false
 
     constructor() {
         makeAutoObservable(this);
@@ -21,6 +25,9 @@ export class CartStore {
             this.total = +(items.reduce((sum, item) => sum + item.price * item.amount, 0).toFixed(2));
         });
     }
+
+    setLoadingState = action((state: boolean) => this.isLoading = state)
+    setErrorState = action((state: boolean) => this.hasError = state)
 
     inCart(id: number) {
         return this.items.some(i => i.id === id);
@@ -58,6 +65,11 @@ export class CartStore {
 
     remove = action((id: number) => {
         this.items = this.items.filter(i => i.id !== id)
+    })
+
+    createOrder = action(async () => {
+        if (this.items.length === 0) return
+        await createOrderRequest(this, { username: userStore.user?.name || "", items: this.items })
     })
 }
 

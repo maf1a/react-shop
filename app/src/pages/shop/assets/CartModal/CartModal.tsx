@@ -48,7 +48,7 @@ export const CartModal = observer((props: CartModalProps) => {
                 </div>
                 <div className="modal-cart_footer">
                     <span className="modal-cart_footer_total">Total: CHF {storeCart.total.toFixed(2)}</span>
-                    <ButtonNormal label="Order" onClick={() => console.log("clicked order")} />
+                    <ButtonNormal label="Order" onClick={() => cartStore.createOrder() } />
                 </div>
             </div>
         </ReactModal>

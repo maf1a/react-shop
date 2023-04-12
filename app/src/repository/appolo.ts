@@ -19,3 +19,13 @@ export const queryAPI = async (query: DocumentNode) => {
         return { data: null, error: e }
     }
 }
+
+export const mutateAPI = async (query: DocumentNode, variables: any) => {
+    try {
+        const { data } = await apollo.mutate({ mutation: query, variables });
+        return { data, error: null }
+    } catch (e) {
+        console.error(e)
+        return { data: null, error: e }
+    }
+}

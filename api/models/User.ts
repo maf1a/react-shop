@@ -1,10 +1,5 @@
+import { Timestamp } from "mongodb";
 import { Schema, model } from "mongoose";
-
-export enum ShopListItemPropsType { 
-    fruit = "fruit", 
-    vegetable = "vegetable",
-    cheese = "cheese"
-}
 
 export interface IShoppingItemOrdered {
     id: string
@@ -17,11 +12,17 @@ export interface IShoppingItemOrdered {
 }
 
 export interface IOrder {
+    creationTime: string
     username: string
-    shoppingItems: IShoppingItemOrdered[]
+    items: IShoppingItemOrdered[]
 }
 
-export const ShoppingItemSchema = new Schema<IShoppingItemOrdered>({
+export interface IUser {
+    username: string
+    orders: IOrder[]
+}
+
+const IShoppingItemOrderedShema = new Schema<IShoppingItemOrdered>({
     id: { type: String, required: true },
     title: { type: String, required: true },
     type: { type: String, required: true },
@@ -29,6 +30,16 @@ export const ShoppingItemSchema = new Schema<IShoppingItemOrdered>({
     priceUnit: { type: String, required: true },
     amount: { type: Number, required: true },
     availability: { type: Number, required: true },
+})
+
+const IOrderShema = new Schema<IOrder>({
+    creationTime: { type: String, required: true },
+    items: [IShoppingItemOrderedShema],
+})
+
+export const UserSchema = new Schema<IUser>({
+    username: { type: String, required: true },
+    orders: [IOrderShema]
 });
   
-export const ShoppingItemModel = model<IShoppingItemOrdered>('ShoppingItemOrdered', ShoppingItemSchema);
+export const UserModel = model<IUser>('User', UserSchema);
